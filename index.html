@@ -753,6 +753,9 @@
     .form-grid { grid-template-columns: 1fr; }
     .about-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
+    #google_translate_element { display: none; }
+    .hamburger { display: flex; }
+    .mobile-translate { display: flex; align-items: center; }
     .trust-item { padding: 10px 16px; font-size: 0.7rem; }
     .section { padding: 2rem 1rem; }
     .services-grid { grid-template-columns: 1fr; }
@@ -767,13 +770,258 @@
     .gallery-dots { gap: 6px; }
     .dot { width: 6px; height: 6px; }
     .dot.active { width: 20px; }
+    #google_translate_element { display: none; }
+    .hamburger { display: flex; }
+    .mobile-translate { display: flex; align-items: center; }
+  }
+
+  /* ── HERO ENTRANCE ANIMATION ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag        { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+  .hero-devanagari { animation: fadeUp 0.6s ease both; animation-delay: 0.25s; }
+  .hero h1         { animation: fadeUp 0.6s ease both; animation-delay: 0.4s; }
+  .hero p          { animation: fadeUp 0.6s ease both; animation-delay: 0.55s; }
+  .hero-btns       { animation: fadeUp 0.6s ease both; animation-delay: 0.7s; }
+
+  /* ── FLOATING WHATSAPP BUTTON ── */
+  .wa-float {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #25D366;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 13px 22px 13px 18px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(37,211,102,0.45);
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: fadeUp 0.7s ease both;
+    animation-delay: 1s;
+  }
+  .wa-float:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px rgba(37,211,102,0.55);
+  }
+  .wa-float svg { width: 22px; height: 22px; flex-shrink: 0; }
+  .wa-float-pulse {
+    display: inline-block;
+    width: 10px; height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    margin-left: 4px;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  /* ── STICKY CONTACT STRIP ── */
+  .contact-strip {
+    background: var(--saffron);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 10px 2rem;
+    flex-wrap: wrap;
+    position: sticky;
+    bottom: 0;
+    z-index: 90;
+    box-shadow: 0 -3px 16px rgba(0,0,0,0.12);
+  }
+  .contact-strip a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition: opacity 0.2s;
+  }
+  .contact-strip a:hover { opacity: 0.85; }
+  .contact-strip .strip-book {
+    background: #fff;
+    color: var(--saffron);
+    padding: 6px 18px;
+    border-radius: 2px;
+    font-size: 0.8rem;
+  }
+
+  /* ── HAMBURGER / MOBILE NAV ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px; height: 2px;
+    background: var(--gold-light);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 60px; left: 0; right: 0; bottom: 0;
+    background: rgba(60,8,8,0.98);
+    z-index: 98;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--gold-light);
+    text-decoration: none;
+    font-family: 'Crimson Pro', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: #fff; }
+  .mobile-translate { display: none; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    background: var(--deep-red);
+    padding: 4rem 2rem;
+  }
+  .testimonials-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .testimonials .section-label { color: rgba(240,192,64,0.7); }
+  .testimonials .section-title { color: #fff; }
+  .testimonials .divider { background: var(--gold); }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .testi-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(240,192,64,0.2);
+    border-radius: 4px;
+    padding: 1.8rem;
+    position: relative;
+  }
+  .testi-card::before {
+    content: '\201C';
+    font-family: 'Crimson Pro', serif;
+    font-size: 4rem;
+    color: rgba(240,192,64,0.2);
+    position: absolute;
+    top: 8px; left: 16px;
+    line-height: 1;
+  }
+  .testi-text {
+    font-size: 0.9rem;
+    color: rgba(255,240,210,0.8);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+  }
+  .testi-stars { color: var(--gold-light); font-size: 0.85rem; margin-bottom: 0.5rem; }
+  .testi-name {
+    font-size: 0.78rem;
+    color: rgba(240,192,64,0.6);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* ── SERVICE CARD BOOK CTA ── */
+  .service-book-cta {
+    display: inline-block;
+    margin-top: 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--saffron);
+    border-bottom: 1px solid rgba(212,87,10,0.3);
+    padding-bottom: 1px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .service-card:hover .service-book-cta {
+    color: var(--deep-red);
+    border-color: var(--deep-red);
+  }
+
+  /* ── PHONE CTA IN HERO ── */
+  .hero-phone {
+    margin-top: 1.2rem;
+    font-size: 0.82rem;
+    color: rgba(255,240,210,0.55);
+    animation: fadeUp 0.6s ease both;
+    animation-delay: 0.85s;
+  }
+  .hero-phone a {
+    color: rgba(255,240,210,0.85);
+    text-decoration: none;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255,240,210,0.3);
+    transition: color 0.2s;
+  }
+  .hero-phone a:hover { color: var(--gold-light); }
+
+  /* ── PROMISE STRIP ── */
+  .promise-strip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    background: #fff;
+    border-top: 1px solid rgba(196,154,40,0.15);
+    border-bottom: 1px solid rgba(196,154,40,0.15);
+  }
+  .promise-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-right: 1px solid rgba(196,154,40,0.15);
+    font-size: 0.78rem;
+    color: var(--text-mid);
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  .promise-item:last-child { border-right: none; }
+  .promise-item .pi {
+    font-size: 1.1rem;
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-brand"><span>ॐ</span> Pandit Sanyam Sharma — Amritsar</div>
+  <div class="nav-brand"><span>ॐ</span></div>
   <ul class="nav-links">
     <li><a onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
     <li><a onclick="showPage('services')" id="nav-services">Services</a></li>
@@ -781,7 +1029,19 @@
     <li><a onclick="showPage('about')" id="nav-about">About</a></li>
   </ul>
   <div id="google_translate_element"></div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a onclick="showPage('home');toggleMenu()">Home</a>
+  <a onclick="showPage('services');toggleMenu()">Services</a>
+  <a onclick="showPage('book');toggleMenu()">Book a Puja</a>
+  <a onclick="showPage('about');toggleMenu()">About</a>
+  <div class="mobile-translate" id="mobile_translate_element"></div>
+</div>
 
 <!-- HOME PAGE -->
 <div class="page active" id="page-home">
@@ -796,14 +1056,22 @@
         <button class="btn-primary" onclick="showPage('book')">Book a Puja</button>
         <button class="btn-outline" onclick="showPage('services')">Our Services</button>
       </div>
+      <p class="hero-phone">Or call / WhatsApp: <a href="tel:+918146938898">+91 81469 38898</a></p>
     </div>
   </div>
 
   <div class="trust-bar">
-    <div class="trust-item"><strong>2</strong>Mandirs</div>
-    <div class="trust-item"><strong>120+</strong> Ancestral Heritage</div>
-    <div class="trust-item"><strong>Dakshina After</strong>Service Only</div>
-    <div class="trust-item"><strong>Divine</strong>First</div>
+    <div class="trust-item"><strong>2</strong>Sacred Mandirs</div>
+    <div class="trust-item"><strong>120+</strong>Years Heritage</div>
+    <div class="trust-item"><strong>Pay Only</strong>After Service</div>
+    <div class="trust-item"><strong>Online</strong>Worldwide</div>
+  </div>
+
+  <div class="promise-strip">
+    <div class="promise-item"><span class="pi">🙏</span> Vedic Vidhi Every Time</div>
+    <div class="promise-item"><span class="pi">🔒</span> No Advance Payment</div>
+    <div class="promise-item"><span class="pi">📱</span> WhatsApp Confirmation</div>
+    <div class="promise-item"><span class="pi">🌍</span> Serving Devotees Worldwide</div>
   </div>
 
   <div style="max-width:1000px; margin: 0 auto; padding: 4rem 2rem 1rem;">
@@ -819,16 +1087,19 @@
         <div class="service-icon">🪔</div>
         <h3>All Puja Services</h3>
         <p>All traditional Vedic pujas: Satyanarayan Katha, Ganesh Pooja, Rudrabhishek, Havan ceremonies, and complete Hindu rituals performed with full vidhi.</p>
+        <span class="service-book-cta">Book Now →</span>
       </div>
       <div class="service-card" onclick="showPage('book')">
         <div class="service-icon">📚</div>
-        <h3>All Jyotish & Kundali Services</h3>
+        <h3>Jyotish & Kundali</h3>
         <p>Birth chart analysis, marriage matching, career guidance, Vastu consultations, auspicious muhurta, and all astrological remedies.</p>
+        <span class="service-book-cta">Consult Now →</span>
       </div>
       <div class="service-card" onclick="showPage('book')">
         <div class="service-icon">🏡</div>
-        <h3>All Home & Life Ceremonies</h3>
+        <h3>Home & Life Ceremonies</h3>
         <p>Griha Pravesh, baby naming, thread ceremony, wedding rituals, anniversary celebrations, and all lifecycle sacraments.</p>
+        <span class="service-book-cta">Book Now →</span>
       </div>
     </div>
   </section>
@@ -890,12 +1161,39 @@
 
   </div>
 </section>
+
+  <!-- TESTIMONIALS -->
+  <div class="testimonials">
+    <div class="testimonials-inner">
+      <div class="section-label">Devotee Experiences</div>
+      <h2 class="section-title">Blessings Received<br>Across the World</h2>
+      <div class="divider"></div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">Pandit Ji performed our Griha Pravesh puja with such devotion and precision. Every mantra was recited correctly, and the entire atmosphere was divine. We are truly grateful.</p>
+          <div class="testi-name">Rajiv K. — Delhi</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">I was in Canada and wanted a puja done at the mandir back home. Pandit Sanyam Ji coordinated everything beautifully. The "pay after" policy made me feel completely at ease.</p>
+          <div class="testi-name">Manpreet S. — Toronto, Canada</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">Kundali reading was deeply insightful. He conducted it only during the auspicious hour as per Vedic tradition, and the remedies he suggested have been very helpful. Highly recommend.</p>
+          <div class="testi-name">Sunita M. — Mumbai</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div style="padding: 0 2rem;">
     <div class="dharma-banner">
       <div class="dharma-icon">☸</div>
       <div>
         <h4>Our Dharmic Promise to You</h4>
-        <p>Following the Sanatan anushashan (discipline) of our lineage, we view dakshina not as payment but as a willing offering of gratitude and bhakti. Every offering received is sacred—<strong>we prepare and offer bhog to Thakur Ji with full devotion, then share these blessings with our devotees and community.</strong> This is our ancient practice: honor the divine first, then extend grace to all. We also support gau sewa (cow care) and the daily activities of our mandirs through these offerings. The practice of dedicating seva to divine worship is a Vedic tradition our family has upheld for over 120 years. Additionally, kundali readings are conducted only during auspicious hours—never after sunset, as per Vedic practice.</p>
+        <p>Following the Sanatan anushashan (discipline) of our lineage, we view dakshina not as payment but as a willing offering of gratitude and bhakti. Every offering received is sacred—<strong>we prepare and offer bhog to Thakur Ji with full devotion, then share these blessings with our devotees and community.</strong> This is our ancient practice: honor the divine first, then extend grace to all. We also support gau sewa (cow care) and the daily activities of our mandirs through these offerings. Kundali readings are conducted only during auspicious hours—never after sunset, as per Vedic practice.</p>
       </div>
     </div>
   </div>
@@ -999,7 +1297,26 @@
       <div class="section-label">Make a Request</div>
       <h2 class="section-title" style="color:#fff;">Book a Puja or<br>Kundali Consultation</h2>
       <div class="divider"></div>
-      <p class="section-sub">Fill in your details below. Pandit Sanyam Sharma will confirm within 24 hours. You pay only after the service is complete.</p>
+      <p class="section-sub">Fill in your details below and your request will be sent directly to Pandit Sanyam Sharma via WhatsApp. He confirms within a few hours. <strong style="color:rgba(240,192,64,0.85);">You pay only after the service is complete.</strong></p>
+
+      <!-- QUICK CONTACT OPTIONS -->
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:2rem;">
+        <a href="https://wa.me/918146938898?text=Namaste%20Pandit%20Ji%2C%20I%20would%20like%20to%20enquire%20about%20your%20services%20%F0%9F%99%8F"
+           target="_blank" rel="noopener noreferrer"
+           style="display:inline-flex; align-items:center; gap:8px; background:#25D366; color:#fff; padding:11px 20px; border-radius:3px; text-decoration:none; font-family:'Lato',sans-serif; font-size:0.82rem; font-weight:700; letter-spacing:0.5px; transition:opacity 0.2s;">
+          💬 Chat on WhatsApp Directly
+        </a>
+        <a href="tel:+918146938898"
+           style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.1); border:1px solid rgba(240,192,64,0.3); color:var(--gold-light); padding:11px 20px; border-radius:3px; text-decoration:none; font-family:'Lato',sans-serif; font-size:0.82rem; font-weight:700; letter-spacing:0.5px; transition:opacity 0.2s;">
+          📞 Call Now: +91 81469 38898
+        </a>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.8rem;">
+        <div style="flex:1; height:1px; background:rgba(240,192,64,0.15);"></div>
+        <span style="font-size:0.72rem; color:rgba(255,240,210,0.4); letter-spacing:2px; text-transform:uppercase;">or fill the form below</span>
+        <div style="flex:1; height:1px; background:rgba(240,192,64,0.15);"></div>
+      </div>
 
       <div class="form-grid">
         <div class="form-group">
@@ -1047,10 +1364,10 @@
       </div>
 
       <p class="form-note" id="date-help">If no preferred date, leave blank and we'll suggest auspicious timings.</p>
-      <p class="form-note">☸ We will contact you on WhatsApp to confirm the booking. Payment is entirely at your discretion — only after the seva is complete and you feel satisfied.</p>
+      <p class="form-note">🙏 Your message goes directly to Pandit Ji on WhatsApp. Payment is entirely at your discretion — only after the seva is complete and you feel fully satisfied.</p>
 
       <div class="submit-row">
-        <button class="btn-primary" onclick="submitForm()">Send Request ↗</button>
+        <button class="btn-primary" onclick="submitForm()" style="font-size:0.9rem; padding:14px 32px;">Send via WhatsApp ↗</button>
         <span style="font-size:0.8rem; color: rgba(255,240,210,0.4);">Usually responds within 4–6 hours</span>
       </div>
 
@@ -1149,13 +1466,24 @@
   </div>
 </div>
 
+<!-- CTA BANNER BEFORE FOOTER -->
+<div style="background: linear-gradient(135deg, var(--saffron) 0%, #B8450A 100%); padding: 3.5rem 2rem; text-align:center;">
+  <div style="font-family:'Tiro Devanagari Sanskrit',serif; font-size:2.2rem; color:rgba(255,255,255,0.25); margin-bottom:0.5rem;">ॐ</div>
+  <h2 style="font-family:'Crimson Pro',serif; font-size:2rem; font-weight:300; color:#fff; margin-bottom:0.5rem;">Ready to receive blessings?</h2>
+  <p style="color:rgba(255,255,255,0.8); font-size:0.95rem; margin-bottom:1.8rem; max-width:480px; margin-left:auto; margin-right:auto; line-height:1.7;">Connect with Pandit Sanyam Sharma today. No advance payment — just faith and devotion.</p>
+  <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+    <button class="btn-primary" onclick="showPage('book')" style="background:#fff; color:var(--saffron); font-size:0.9rem; padding:14px 32px;">🙏 Book a Puja</button>
+    <a href="https://wa.me/918146938898?text=Namaste%20Pandit%20Ji%2C%20I%20would%20like%20to%20enquire%20about%20a%20puja%20%F0%9F%99%8F"
+       target="_blank" rel="noopener noreferrer"
+       style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.15); border:2px solid rgba(255,255,255,0.5); color:#fff; padding:12px 28px; border-radius:2px; text-decoration:none; font-family:'Lato',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:1px; text-transform:uppercase;">
+      💬 WhatsApp Us
+    </a>
+  </div>
+</div>
+
 <footer>
   <strong>Pandit Sanyam Sharma — Amritsar</strong><br>
-  Serving devotees in Amritsar and worldwide<br>
-  <div class="contact-links">
-    <a href="tel:+918146938898"><span>📞</span> Call: +91-8146938898</a>
-    <a href="https://wa.me/918146938898" target="_blank" rel="noopener noreferrer"><span>💬</span> WhatsApp</a>
-  </div>
+  4th Generation Pandit · Serving devotees in Amritsar and worldwide<br>
   <div class="tagline">Om Saraswati Mahabhage Vidye Kamala Lochani · ॐ</div>
 </footer>
 
@@ -1268,12 +1596,39 @@ function closePoster() {
   document.getElementById('posterModal').style.display = 'none';
 }
 
+function toggleMenu() {
+  const menu = document.getElementById('mobile-menu');
+  menu.classList.toggle('open');
+  const bars = document.querySelectorAll('.hamburger span');
+  const isOpen = menu.classList.contains('open');
+  bars[0].style.transform = isOpen ? 'translateY(7px) rotate(45deg)' : '';
+  bars[1].style.opacity = isOpen ? '0' : '1';
+  bars[2].style.transform = isOpen ? 'translateY(-7px) rotate(-45deg)' : '';
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
   updateDots();
 });
 
 </script>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/918146938898?text=Namaste%20Pandit%20Sanyam%20Ji%2C%20I%20would%20like%20to%20enquire%20about%20your%20services.%20%F0%9F%99%8F"
+     target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    WhatsApp Us
+    <span class="wa-float-pulse"></span>
+  </a>
+
+  <!-- STICKY CONTACT STRIP -->
+  <div class="contact-strip" id="contact-strip">
+    <a href="tel:+918146938898">📞 +91 81469 38898</a>
+    <a href="https://wa.me/918146938898" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+    <a class="strip-book" onclick="showPage('book')" style="cursor:pointer;">🙏 Book a Puja</a>
+  </div>
 
   <!-- POSTER MODAL -->
   <div id="posterModal" style="
