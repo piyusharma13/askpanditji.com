@@ -39,7 +39,18 @@
 <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ॐ</text></svg>">
 <title>Pandit Sanyam Sharma - Amritsar</title>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;">
+<!-- Google Translate -->
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,hi,pa',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -104,6 +115,55 @@
     transition: color 0.2s;
   }
   .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
+
+  /* GOOGLE TRANSLATE */
+  #google_translate_element select {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(240,192,64,0.4);
+    color: var(--gold-light);
+    font-size: 0.78rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 5px 8px;
+    border-radius: 2px;
+    cursor: pointer;
+    outline: none;
+  }
+  #google_translate_element select option {
+    background: var(--deep-red);
+    color: #fff;
+  }
+  body { top: 0 !important; }
+  .skiptranslate { display: none !important; }
+
+  /* BACK TO HOME BUTTON */
+  .back-home-bar {
+    background: var(--cream-dark);
+    border-bottom: 1px solid rgba(196,154,40,0.2);
+    padding: 10px 2rem;
+  }
+  .back-home-btn {
+    background: transparent;
+    border: 1px solid rgba(139,26,26,0.35);
+    color: var(--deep-red);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .back-home-btn:hover {
+    background: rgba(139,26,26,0.08);
+    border-color: var(--deep-red);
+  }
 
   /* HERO */
   .hero {
@@ -720,6 +780,7 @@
     <li><a onclick="showPage('book')" id="nav-book">Book Puja</a></li>
     <li><a onclick="showPage('about')" id="nav-about">About</a></li>
   </ul>
+  <div id="google_translate_element"></div>
 </nav>
 
 <!-- HOME PAGE -->
@@ -842,6 +903,9 @@
 
 <!-- SERVICES PAGE -->
 <div class="page" id="page-services">
+  <div class="back-home-bar">
+    <button class="back-home-btn" onclick="showPage('home')">← Back to Home</button>
+  </div>
   <section>
     <div class="section-label">What We Offer</div>
     <h2 class="section-title">Complete Range of<br>Hindu Rituals & Astrology</h2>
@@ -927,6 +991,9 @@
 
 <!-- BOOKING PAGE -->
 <div class="page" id="page-book">
+  <div class="back-home-bar">
+    <button class="back-home-btn" onclick="showPage('home')">← Back to Home</button>
+  </div>
   <div class="booking-section">
     <div class="booking-inner">
       <div class="section-label">Make a Request</div>
