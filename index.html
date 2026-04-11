@@ -1016,15 +1016,309 @@
   .promise-item .pi {
     font-size: 1.1rem;
   }
+  /* ── NEEDS SECTION ── */
+  .needs-section {
+    background: #fff;
+    padding: 4rem 2rem;
+  }
+  .needs-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .needs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .need-card {
+    padding: 1.8rem;
+    border-radius: 4px;
+    border: 1px solid rgba(196,154,40,0.2);
+    background: var(--cream);
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+  }
+  .need-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(139,26,26,0.08);
+    border-color: rgba(196,154,40,0.5);
+  }
+  .need-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+  .need-card h3 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.1rem;
+    color: var(--deep-red);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  .need-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+  @media (max-width: 768px) { .needs-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px)  { .needs-grid { grid-template-columns: 1fr; } }
+
+  /* ── SERVICES OVERVIEW ── */
+  .services-overview {
+    background: var(--cream-dark);
+    padding: 4rem 2rem;
+    border-top: 1px solid rgba(196,154,40,0.15);
+    border-bottom: 1px solid rgba(196,154,40,0.15);
+  }
+  .services-overview-inner { max-width: 1000px; margin: 0 auto; }
+  .service-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    margin-top: 2rem;
+  }
+  .service-list-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.8rem 0 0;
+  }
+  .service-list-col ul li {
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(196,154,40,0.12);
+    line-height: 1.5;
+  }
+  .service-list-col ul li:last-child { border-bottom: none; }
+  .service-list-heading {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--deep-red);
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--gold);
+  }
+  .services-overview-cta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .overview-note {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    font-style: italic;
+  }
+  @media (max-width: 768px) { .service-list { grid-template-columns: 1fr; gap: 2rem; } }
+
+  /* ── VISIT MANDIR TEASER (home page) ── */
+  .visit-teaser {
+    background: linear-gradient(160deg, var(--deep-red) 0%, #3A0A0A 100%);
+    padding: 4rem 2rem;
+  }
+  .visit-teaser-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .visit-schedule-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+  }
+  .schedule-pill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(240,192,64,0.25);
+    border-radius: 50px;
+    padding: 5px 14px;
+    font-size: 0.76rem;
+    color: rgba(255,240,210,0.85);
+    font-weight: 600;
+  }
+  .visit-teaser-mandirs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .teaser-mandir-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(240,192,64,0.2);
+    border-radius: 4px;
+    padding: 1.4rem 1.6rem;
+  }
+  .teaser-mandir-name {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
+  }
+  .teaser-mandir-addr {
+    font-size: 0.82rem;
+    color: rgba(255,240,210,0.55);
+    line-height: 1.6;
+    margin-bottom: 0.6rem;
+  }
+  .teaser-map-link {
+    font-size: 0.8rem;
+    color: var(--saffron);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .teaser-map-link:hover { color: var(--gold-light); }
+  @media (max-width: 768px) { .visit-teaser-inner { grid-template-columns: 1fr; gap: 2rem; } }
+
+  /* ── VISIT MANDIR PAGE ── */
+  .visit-schedule-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(196,154,40,0.15);
+    border: 1px solid rgba(196,154,40,0.15);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 2rem;
+  }
+  .visit-event-card {
+    background: #fff;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: background 0.2s;
+  }
+  .visit-event-card:hover { background: var(--cream); }
+  .visit-event-card.morning { background: linear-gradient(135deg,#fffaf2,#fff8ec); }
+  .visit-event-card.evening { background: linear-gradient(135deg,#fff5f0,#fff8f5); }
+  .visit-event-card.featured-event {
+    background: var(--deep-red);
+    grid-column: 1 / -1;
+  }
+  .visit-event-card.featured-event h3 { color: var(--gold-light); }
+  .visit-event-card.featured-event p { color: rgba(255,240,210,0.75); }
+  .visit-event-card.featured-event .event-time-badge {
+    background: rgba(240,192,64,0.2);
+    color: var(--gold-light);
+    border-color: rgba(240,192,64,0.3);
+  }
+  .event-time-badge {
+    display: inline-block;
+    background: rgba(212,87,10,0.1);
+    border: 1px solid rgba(212,87,10,0.2);
+    color: var(--saffron);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    align-self: flex-start;
+    text-transform: uppercase;
+  }
+  .event-icon { font-size: 1.8rem; line-height: 1; }
+  .visit-event-card h3 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.2rem;
+    color: var(--deep-red);
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+  }
+  .visit-event-card p {
+    font-size: 0.86rem;
+    color: var(--text-light);
+    line-height: 1.75;
+    margin: 0;
+    flex: 1;
+  }
+  .event-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+  .special-tag { color: var(--gold); }
+  .visit-event-card.featured-event .event-tag { color: rgba(240,192,64,0.6); }
+
+  /* Mandir detail cards on visit page */
+  .mandir-detail-card {
+    background: #fff;
+    border: 1px solid rgba(196,154,40,0.25);
+    border-radius: 4px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .mandir-detail-card.featured-mandir {
+    border-color: var(--gold);
+    border-width: 2px;
+  }
+  .mandir-detail-icon { font-size: 1.8rem; }
+  .mandir-detail-card h3 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.1rem;
+    color: var(--deep-red);
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0;
+  }
+  .mandir-detail-card p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .mandir-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.2rem 0;
+  }
+  .mandir-tags span {
+    background: var(--cream-dark);
+    border-radius: 50px;
+    padding: 3px 10px;
+    font-size: 0.72rem;
+    color: var(--text-mid);
+    font-weight: 600;
+  }
+  .mandir-directions-btn {
+    display: inline-block;
+    margin-top: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--saffron);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(212,87,10,0.3);
+    padding-bottom: 1px;
+    align-self: flex-start;
+    transition: color 0.2s;
+  }
+  .mandir-directions-btn:hover { color: var(--deep-red); }
+
+  @media (max-width: 600px) {
+    .visit-schedule-grid { grid-template-columns: 1fr; }
+    .visit-event-card.featured-event { grid-column: span 1; }
+    [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+  }
+
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-brand"><span>ॐ</span></div>
+  <div class="nav-brand">Pandit Sanyam Sharma — Amritsar</div>
   <ul class="nav-links">
     <li><a onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
     <li><a onclick="showPage('services')" id="nav-services">Services</a></li>
+    <li><a onclick="showPage('visit')" id="nav-visit">Visit Mandir</a></li>
     <li><a onclick="showPage('book')" id="nav-book">Book Puja</a></li>
     <li><a onclick="showPage('about')" id="nav-about">About</a></li>
   </ul>
@@ -1038,6 +1332,7 @@
 <div class="mobile-menu" id="mobile-menu">
   <a onclick="showPage('home');toggleMenu()">Home</a>
   <a onclick="showPage('services');toggleMenu()">Services</a>
+  <a onclick="showPage('visit');toggleMenu()">Visit Mandir</a>
   <a onclick="showPage('book');toggleMenu()">Book a Puja</a>
   <a onclick="showPage('about');toggleMenu()">About</a>
   <div class="mobile-translate" id="mobile_translate_element"></div>
@@ -1045,157 +1340,334 @@
 
 <!-- HOME PAGE -->
 <div class="page active" id="page-home">
+
+  <!-- HERO: needs-first, human, warm -->
   <div class="hero">
     <div class="om-bg">ॐ</div>
     <div class="hero-content">
-      <div class="hero-tag">4th Generation Pandit · Amritsar, Punjab · SERVING SINCE 1906</div>
+      <div class="hero-tag">Amritsar · Est. 1906 · 4th Generation Pandit</div>
       <div class="hero-devanagari">ॐ नमः शिवाय</div>
-      <h1>Pandit <strong>Sanyam Sharma</strong><br>— Preserving Vedic Heritage</h1>
-      <p>Whether you are in Amritsar or anywhere across the world — receive the blessings of our two sacred mandirs through online puja and personal jyotish consultations.</p>
+      <h1><strong>Bring your prayers.</strong><br>We'll take care of the rest.</h1>
+      <p>Whatever you are facing — a new beginning, a troubled mind, a sacred occasion, or simply the need to feel connected to something greater — we are here. From our two mandirs in Amritsar to wherever you are in the world.</p>
       <div class="hero-btns">
-        <button class="btn-primary" onclick="showPage('book')">Book a Puja</button>
-        <button class="btn-outline" onclick="showPage('services')">Our Services</button>
+        <button class="btn-outline" onclick="showPage('services')">See How We Can Help</button>
+        <button class="btn-outline" onclick="showPage('visit')" style="border-color:rgba(240,192,64,0.3);">Visit the Mandir</button>
       </div>
-      <p class="hero-phone">Or call / WhatsApp: <a href="tel:+918146938898">+91 81469 38898</a></p>
+      <p class="hero-phone">Talk to us: <a href="https://wa.me/918146938898" target="_blank">WhatsApp</a> &nbsp;·&nbsp; <a href="tel:+918146938898">+91 81469 38898</a></p>
     </div>
   </div>
 
+  <!-- TRUST BAR -->
   <div class="trust-bar">
     <div class="trust-item"><strong>2</strong>Sacred Mandirs</div>
-    <div class="trust-item"><strong>120+</strong>Years Heritage</div>
+    <div class="trust-item"><strong>120+</strong>Years of Seva</div>
     <div class="trust-item"><strong>Pay Only</strong>After Service</div>
-    <div class="trust-item"><strong>Online</strong>Worldwide</div>
+    <div class="trust-item"><strong>Worldwide</strong>Online Puja</div>
   </div>
 
-  <div class="promise-strip">
-    <div class="promise-item"><span class="pi">🙏</span> Vedic Vidhi Every Time</div>
-    <div class="promise-item"><span class="pi">🔒</span> No Advance Payment</div>
-    <div class="promise-item"><span class="pi">📱</span> WhatsApp Confirmation</div>
-    <div class="promise-item"><span class="pi">🌍</span> Serving Devotees Worldwide</div>
-  </div>
+  <!-- NEEDS SECTION: speak to the person, not the service -->
+  <div class="needs-section">
+    <div class="needs-inner">
+      <div class="section-label">Whatever Brings You Here</div>
+      <h2 class="section-title">You Don't Need a Reason.<br>Just Come.</h2>
+      <div class="divider"></div>
+      <p class="section-sub">People reach us in all kinds of moments. Here are some of the ways we help — perhaps one of them speaks to you.</p>
 
-  <div style="max-width:1000px; margin: 0 auto; padding: 4rem 2rem 1rem;">
-    <div class="section-label">Our Offerings</div>
-    <h2 class="section-title">Sacred Services<br>for Every Occasion</h2>
-    <div class="divider"></div>
-    <p class="section-sub">Every puja is performed with full vidhi and devotion. You only pay after the seva is complete — our trust in dharma is your guarantee.</p>
-  </div>
-
-  <section style="padding-top: 0;">
-    <div class="services-grid">
-      <div class="service-card" onclick="showPage('book')">
-        <div class="service-icon">🪔</div>
-        <h3>All Puja Services</h3>
-        <p>All traditional Vedic pujas: Satyanarayan Katha, Ganesh Pooja, Rudrabhishek, Havan ceremonies, and complete Hindu rituals performed with full vidhi.</p>
-        <span class="service-book-cta">Book Now →</span>
+      <div class="needs-grid">
+        <div class="need-card" onclick="showPage('services')">
+          <div class="need-icon">🏠</div>
+          <h3>Moving into a new home</h3>
+          <p>A proper Griha Pravesh fills your new space with positive energy and divine blessings before life begins there.</p>
+        </div>
+        <div class="need-card" onclick="showPage('services')">
+          <div class="need-icon">💍</div>
+          <h3>Planning a wedding or ceremony</h3>
+          <p>Kundali matching, auspicious muhurta, and the full wedding ritual conducted with authentic Vedic vidhi.</p>
+        </div>
+        <div class="need-card" onclick="showPage('services')">
+          <div class="need-icon">😔</div>
+          <h3>Going through a difficult time</h3>
+          <p>Health struggles, financial worries, family tensions — specific pujas and remedies exist for every kind of suffering.</p>
+        </div>
+        <div class="need-card" onclick="showPage('services')">
+          <div class="need-icon">🌍</div>
+          <h3>Living far from home</h3>
+          <p>Away from India but want puja done at a real mandir? We perform it on your behalf from our sacred mandirs in Amritsar.</p>
+        </div>
+        <div class="need-card" onclick="showPage('services')">
+          <div class="need-icon">❓</div>
+          <h3>Seeking guidance on life's big questions</h3>
+          <p>Career, marriage, business, children — a detailed kundali reading can bring clarity and a path forward.</p>
+        </div>
+        <div class="need-card" onclick="showPage('visit')">
+          <div class="need-icon">🛕</div>
+          <h3>Wanting to connect spiritually</h3>
+          <p>Come for morning Aarti, weekly Bhajan, silent meditation, or simply sit in the mandir. All are welcome, any day.</p>
+        </div>
       </div>
-      <div class="service-card" onclick="showPage('book')">
-        <div class="service-icon">📚</div>
-        <h3>Jyotish & Kundali</h3>
-        <p>Birth chart analysis, marriage matching, career guidance, Vastu consultations, auspicious muhurta, and all astrological remedies.</p>
-        <span class="service-book-cta">Consult Now →</span>
+    </div>
+  </div>
+
+  <!-- WHAT WE OFFER: services listed, no book buttons -->
+  <div class="services-overview">
+    <div class="services-overview-inner">
+      <div class="section-label">Our Services</div>
+      <h2 class="section-title">What Pandit Sanyam<br>Sharma Offers</h2>
+      <div class="divider"></div>
+
+      <div class="service-list">
+        <div class="service-list-col">
+          <div class="service-list-heading">🪔 Puja &amp; Ritual Services</div>
+          <ul>
+            <li>Satyanarayan Katha</li>
+            <li>Rudrabhishek &amp; Panchamrit Abhishek</li>
+            <li>Ganesh, Lakshmi &amp; Navgraha Puja</li>
+            <li>Havan &amp; Yagna ceremonies</li>
+            <li>Durga, Saraswati &amp; festival pujas</li>
+            <li>Pitra Dosha &amp; Shanti pujas</li>
+            <li>Custom &amp; personalised rituals</li>
+          </ul>
+        </div>
+        <div class="service-list-col">
+          <div class="service-list-heading">📜 Jyotish &amp; Guidance</div>
+          <ul>
+            <li>Complete Kundali analysis</li>
+            <li>Marriage &amp; kundali matching</li>
+            <li>Auspicious Muhurta selection</li>
+            <li>Career &amp; life path guidance</li>
+            <li>Vastu consultation</li>
+            <li>Gemstone &amp; yantra recommendations</li>
+            <li>Predictive &amp; remedial astrology</li>
+          </ul>
+        </div>
+        <div class="service-list-col">
+          <div class="service-list-heading">🏡 Ceremonies &amp; Sacraments</div>
+          <ul>
+            <li>Griha Pravesh &amp; Vastu Shanti</li>
+            <li>Wedding rituals &amp; Vivah puja</li>
+            <li>Baby naming &amp; Naamkaran</li>
+            <li>Thread ceremony &amp; Upanayan</li>
+            <li>Anniversary blessings</li>
+            <li>Last rites &amp; Shradh ceremonies</li>
+            <li>Online puja — performed worldwide</li>
+          </ul>
+        </div>
       </div>
-      <div class="service-card" onclick="showPage('book')">
-        <div class="service-icon">🏡</div>
-        <h3>Home & Life Ceremonies</h3>
-        <p>Griha Pravesh, baby naming, thread ceremony, wedding rituals, anniversary celebrations, and all lifecycle sacraments.</p>
-        <span class="service-book-cta">Book Now →</span>
+
+      <div class="services-overview-cta">
+        <button class="btn-primary" onclick="showPage('services')">View All Services</button>
+        <span class="overview-note">Pay only after the service is complete. No advance, ever.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISIT MANDIR TEASER -->
+  <div class="visit-teaser">
+    <div class="visit-teaser-inner">
+      <div class="visit-teaser-text">
+        <div class="section-label" style="color:rgba(240,192,64,0.7);">Visit Us in Amritsar</div>
+        <h2 class="section-title" style="color:#fff;">The Mandir is Open.<br>You Are Welcome.</h2>
+        <div class="divider"></div>
+        <p style="color:rgba(255,240,210,0.75); line-height:1.8; margin-bottom:1.5rem;">Join us for morning or evening Aarti, Wednesday Bhajan Satsang, Shivlaya Puja, meditation, and sacred scripture reading. No registration needed — come as you are.</p>
+        <div class="visit-schedule-preview">
+          <div class="schedule-pill">🔔 Morning Aarti · 5:30–7:00 AM</div>
+          <div class="schedule-pill">🪔 Evening Aarti · 6:00–8:00 PM</div>
+          <div class="schedule-pill">🎵 Bhajan · Wed 4–6 PM</div>
+          <div class="schedule-pill">🛕 Shivlaya Sewa · All Day</div>
+        </div>
+        <button class="btn-outline" onclick="showPage('visit')" style="margin-top:1.5rem;">See Full Schedule →</button>
+      </div>
+      <div class="visit-teaser-mandirs">
+        <div class="teaser-mandir-card">
+          <div class="teaser-mandir-name">Goswami Ram Lal Ji Maharaj<br>Radha Krishna Mandir</div>
+          <div class="teaser-mandir-addr">Bombay Wala Khu, Opposite Panna Sweets, Amritsar</div>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=31.624226,74.872536" target="_blank" class="teaser-map-link">🚗 Get Directions</a>
+        </div>
+        <div class="teaser-mandir-card">
+          <div class="teaser-mandir-name">Shri Radha Krishna Mandir</div>
+          <div class="teaser-mandir-addr">Guru Bazar Chowk, Chorasti Attari Gali Ardasia, Amritsar</div>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=31.621920,74.873322" target="_blank" class="teaser-map-link">🚗 Get Directions</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPCOMING EVENT -->
+  <section style="max-width:1000px; margin:0 auto; padding:3rem 2rem;">
+    <div style="background:linear-gradient(135deg,#8B1A1A,#5C0F0F); border-radius:8px; padding:2rem; color:#fff; position:relative; overflow:hidden;">
+      <div style="font-size:0.7rem; letter-spacing:2px; color:#F0C040; font-weight:700; margin-bottom:8px;">🔥 UPCOMING EVENT</div>
+      <h2 style="font-family:'Crimson Pro',serif; font-size:2rem; margin-bottom:0.5rem;">Shrimad Bhagwat Katha Gyan Yajna</h2>
+      <p style="color:rgba(255,240,210,0.8); font-size:0.95rem; margin-bottom:1.5rem;">Organised by Gautam Parivar · 18 May – 24 May 2026 · Amritsar</p>
+      <div style="display:flex; gap:1.5rem; flex-wrap:wrap; align-items:center;">
+        <div style="flex:1; min-width:240px;"><img src="images/katha.jpg" onclick="openPoster()" style="width:100%; border-radius:6px; cursor:pointer;"></div>
+        <div style="flex:1; min-width:240px;">
+          <p style="font-size:0.9rem; line-height:1.7;">Experience divine katha, bhakti, and spiritual wisdom. Open to all devotees.</p>
+          <button onclick="openPoster()" style="margin-top:12px; background:#F0C040; color:#5C0F0F; border:none; padding:10px 20px; font-weight:700; cursor:pointer; border-radius:4px;">View Event Details</button>
+        </div>
       </div>
     </div>
   </section>
-
-<!-- UPCOMING EVENT HIGHLIGHT -->
-<section style="max-width:1100px; margin:0 auto; padding:3rem 2rem;">
-  
-  <div style="
-    background: linear-gradient(135deg, #8B1A1A, #5C0F0F);
-    border-radius:8px;
-    padding:2rem;
-    color:#fff;
-    position:relative;
-    overflow:hidden;
-  ">
-
-    <div style="font-size:0.7rem; letter-spacing:2px; color:#F0C040; font-weight:700; margin-bottom:8px;">
-      🔥 UPCOMING EVENT
-    </div>
-
-    <h2 style="font-family:'Crimson Pro', serif; font-size:2rem; margin-bottom:0.5rem;">
-      Shrimad Bhagwat Katha Gyan Yajna
-    </h2>
-
-    <p style="color:rgba(255,240,210,0.8); font-size:0.95rem; margin-bottom:1.5rem;">
-      Organised by Gautam Parivar · 18 May – 24 May 2026 · Amritsar
-    </p>
-
-    <div style="display:flex; gap:1.5rem; flex-wrap:wrap; align-items:center;">
-      
-      <!-- IMAGE -->
-      <div style="flex:1; min-width:260px;">
-        <img src="images/katha.jpg" 
-             onclick="openPoster()"
-             style="width:100%; border-radius:6px; cursor:pointer;">
-      </div>
-
-      <!-- DETAILS -->
-      <div style="flex:1; min-width:260px;">
-        <p style="font-size:0.9rem; line-height:1.7;">
-          Experience divine katha, bhakti, and spiritual wisdom.
-        </p>
-
-        <button onclick="openPoster()" style="
-          margin-top:10px;
-          background:#F0C040;
-          color:#5C0F0F;
-          border:none;
-          padding:10px 18px;
-          font-weight:700;
-          cursor:pointer;
-          border-radius:4px;
-        ">
-          View Event Details
-        </button>
-      </div>
-
-    </div>
-
-  </div>
-</section>
 
   <!-- TESTIMONIALS -->
   <div class="testimonials">
     <div class="testimonials-inner">
       <div class="section-label">Devotee Experiences</div>
-      <h2 class="section-title">Blessings Received<br>Across the World</h2>
+      <h2 class="section-title">Words from Those<br>Who Came to Us</h2>
       <div class="divider"></div>
       <div class="testi-grid">
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">Pandit Ji performed our Griha Pravesh puja with such devotion and precision. Every mantra was recited correctly, and the entire atmosphere was divine. We are truly grateful.</p>
+          <p class="testi-text">Pandit Ji performed our Griha Pravesh with such devotion and care. Every mantra was recited correctly, and the atmosphere was truly divine. We felt the difference immediately.</p>
           <div class="testi-name">Rajiv K. — Delhi</div>
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">I was in Canada and wanted a puja done at the mandir back home. Pandit Sanyam Ji coordinated everything beautifully. The "pay after" policy made me feel completely at ease.</p>
+          <p class="testi-text">I live in Canada and wanted a puja done at a real mandir back home. Pandit Sanyam Ji made it happen beautifully. The "pay after" policy gave me complete peace of mind.</p>
           <div class="testi-name">Manpreet S. — Toronto, Canada</div>
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">Kundali reading was deeply insightful. He conducted it only during the auspicious hour as per Vedic tradition, and the remedies he suggested have been very helpful. Highly recommend.</p>
+          <p class="testi-text">The kundali reading was deeply insightful and the remedies have genuinely helped. Pandit Ji conducted it only at an auspicious hour — that kind of authenticity is rare today.</p>
           <div class="testi-name">Sunita M. — Mumbai</div>
         </div>
       </div>
     </div>
   </div>
 
-  <div style="padding: 0 2rem;">
+  <!-- DHARMA PROMISE -->
+  <div style="padding: 0 2rem 3rem;">
     <div class="dharma-banner">
       <div class="dharma-icon">☸</div>
       <div>
         <h4>Our Dharmic Promise to You</h4>
-        <p>Following the Sanatan anushashan (discipline) of our lineage, we view dakshina not as payment but as a willing offering of gratitude and bhakti. Every offering received is sacred—<strong>we prepare and offer bhog to Thakur Ji with full devotion, then share these blessings with our devotees and community.</strong> This is our ancient practice: honor the divine first, then extend grace to all. We also support gau sewa (cow care) and the daily activities of our mandirs through these offerings. Kundali readings are conducted only during auspicious hours—never after sunset, as per Vedic practice.</p>
+        <p>We view dakshina not as payment but as a willing offering of gratitude and bhakti. Every offering received is sacred — <strong>we prepare bhog to Thakur Ji with full devotion, then share these blessings with our devotees and community.</strong> We also support gau sewa and our mandirs' daily activities through these offerings. Kundali readings are conducted only during auspicious hours — never after sunset, as per Vedic practice.</p>
       </div>
     </div>
+  </div>
+
+</div><!-- end page-home -->
+
+<!-- VISIT MANDIR PAGE -->
+<div class="page" id="page-visit">
+  <div class="back-home-bar">
+    <button class="back-home-btn" onclick="showPage('home')">← Back to Home</button>
+  </div>
+
+  <!-- HEADER -->
+  <div style="background:linear-gradient(160deg,var(--deep-red) 0%,#5C0F0F 100%); padding:4rem 2rem 3rem; text-align:center; position:relative; overflow:hidden;">
+    <div style="position:absolute;inset:0;font-family:'Tiro Devanagari Sanskrit',serif;font-size:320px;color:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;pointer-events:none;user-select:none;">ॐ</div>
+    <div style="position:relative;">
+      <div class="section-label" style="color:rgba(240,192,64,0.7);">Amritsar</div>
+      <h1 style="font-family:'Crimson Pro',serif;font-size:2.8rem;font-weight:300;color:#fff;margin-bottom:0.5rem;">The Mandir is Open.<br><strong style="font-weight:600;color:var(--gold-light);">You Are Welcome.</strong></h1>
+      <p style="color:rgba(255,240,210,0.7);max-width:520px;margin:1rem auto 0;line-height:1.8;font-size:0.95rem;">Come for Aarti, stay for Bhajan, sit in silence, or simply offer a prayer. There is no occasion too small and no burden too heavy. All are welcome — every day, any time.</p>
+    </div>
+  </div>
+
+  <!-- DAILY SCHEDULE -->
+  <section style="max-width:900px;margin:0 auto;padding:4rem 2rem 2rem;">
+    <div class="section-label">Daily Schedule</div>
+    <h2 class="section-title">What Happens at<br>the Mandir Each Day</h2>
+    <div class="divider"></div>
+
+    <div class="visit-schedule-grid">
+
+      <div class="visit-event-card morning">
+        <div class="event-time-badge">5:30 – 7:00 AM</div>
+        <div class="event-icon">🔔</div>
+        <h3>Morning Aarti &amp; Opening Rituals</h3>
+        <p>Begin your day with the divine. Morning Aarti sets a sacred tone for the day — the bells, the incense, the chants create an atmosphere you carry with you all day long. Timings may vary slightly by season and festivals.</p>
+        <div class="event-tag">Daily · Both Mandirs</div>
+      </div>
+
+      <div class="visit-event-card">
+        <div class="event-time-badge">All Day</div>
+        <div class="event-icon">🛕</div>
+        <h3>Shivlaya Puja &amp; Sewa</h3>
+        <p>The Shivlaya at Shri Radha Krishna Mandir is open throughout the day for darshan, personal puja, and sewa. Come whenever you feel called — offer flowers, water, or simply your presence.</p>
+        <div class="event-tag">Daily · Shri Radha Krishna Mandir</div>
+      </div>
+
+      <div class="visit-event-card">
+        <div class="event-time-badge">Anytime</div>
+        <div class="event-icon">🧘</div>
+        <h3>Dhyan &amp; Sadhan (Meditation)</h3>
+        <p>The mandir is a place of silence as much as it is of song. Come and sit. Meditate, reflect, or simply breathe. No guidance needed — just arrive and be still in the presence of the divine.</p>
+        <div class="event-tag">Daily · Both Mandirs</div>
+      </div>
+
+      <div class="visit-event-card">
+        <div class="event-time-badge">Anytime</div>
+        <div class="event-icon">📖</div>
+        <h3>Sacred Scripture Reading</h3>
+        <p>Read from the Bhagavad Gita, Ramcharitmanas, or the Vedas at your own pace. Copies are available at the mandir. Whether you read aloud or in silence, the wisdom of the texts is yours to absorb.</p>
+        <div class="event-tag">Daily · Both Mandirs</div>
+      </div>
+
+      <div class="visit-event-card evening">
+        <div class="event-time-badge">6:00 – 8:00 PM</div>
+        <div class="event-icon">🪔</div>
+        <h3>Evening Aarti &amp; Closing Rituals</h3>
+        <p>The evening Aarti is a moment of collective surrender — as the day winds down, the lamps are lit, the prayers rise, and the mandir glows with warmth. A beautiful way to end any day.</p>
+        <div class="event-tag">Daily · Both Mandirs</div>
+      </div>
+
+      <div class="visit-event-card featured-event">
+        <div class="event-time-badge">Wednesday · 4:00 – 6:00 PM</div>
+        <div class="event-icon">🎵</div>
+        <h3>Weekly Bhajan Satsang</h3>
+        <p>Every Wednesday, devotees gather to sing bhajans together — songs of Krishna, Rama, and Shiva that fill the mandir and lift the spirit. No experience or training required. If you have a voice, you are welcome. If you don't, come and listen.</p>
+        <div class="event-tag special-tag">Weekly · Shri Radha Krishna Mandir</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- THE TWO MANDIRS -->
+  <div style="background:var(--cream-dark);padding:3rem 2rem;">
+    <div style="max-width:900px;margin:0 auto;">
+      <div class="section-label">Find Us</div>
+      <h2 class="section-title">Our Two Sacred Mandirs<br>in Amritsar</h2>
+      <div class="divider"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1rem;">
+
+        <div class="mandir-detail-card">
+          <div class="mandir-detail-icon">🛕</div>
+          <h3>Goswami Ram Lal Ji Maharaj<br>Radha Krishna Mandir</h3>
+          <p>Bombay Wala Khu, Opposite Panna Sweets,<br>Amritsar, Punjab</p>
+          <div class="mandir-tags">
+            <span>Morning &amp; Evening Aarti</span>
+            <span>Dhyan &amp; Scripture Reading</span>
+          </div>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=31.624226,74.872536" target="_blank" class="mandir-directions-btn">🚗 Get Directions</a>
+        </div>
+
+        <div class="mandir-detail-card featured-mandir">
+          <div class="mandir-detail-icon">🛕</div>
+          <h3>Shri Radha Krishna Mandir</h3>
+          <p>Guru Bazar Chowk, Chorasti Attari Gali<br>Ardasia, Amritsar, Punjab</p>
+          <div class="mandir-tags">
+            <span>Morning &amp; Evening Aarti</span>
+            <span>Shivlaya Puja &amp; Sewa</span>
+            <span>Wednesday Bhajan</span>
+            <span>Dhyan &amp; Scripture</span>
+          </div>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=31.621920,74.873322" target="_blank" class="mandir-directions-btn">🚗 Get Directions</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- WHATSAPP FOR UPDATES -->
+  <div style="background:var(--deep-red);padding:3rem 2rem;text-align:center;">
+    <div class="dharma-icon" style="font-size:2rem;margin-bottom:0.8rem;">🙏</div>
+    <h3 style="font-family:'Crimson Pro',serif;font-size:1.6rem;font-weight:300;color:#fff;margin-bottom:0.5rem;">Want to know before you visit?</h3>
+    <p style="color:rgba(255,240,210,0.7);font-size:0.9rem;margin-bottom:1.5rem;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.8;">WhatsApp Pandit Sanyam Sharma to confirm timings on festival days or ask any questions before you come.</p>
+    <a href="https://wa.me/918146938898?text=Namaste%20Pandit%20Ji%2C%20I%20would%20like%20to%20visit%20the%20mandir.%20Can%20you%20please%20confirm%20the%20timings%3F%20%F0%9F%99%8F"
+       target="_blank" rel="noopener noreferrer"
+       style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:13px 28px;border-radius:3px;text-decoration:none;font-family:'Lato',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.5px;">
+      💬 WhatsApp to Confirm Timings
+    </a>
   </div>
 </div>
 
