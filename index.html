@@ -138,6 +138,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&amp;family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TS0NV2ES58"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-TS0NV2ES58', { send_page_view: false });
+</script>
 <!-- Google Translate -->
 <script type="text/javascript">
   function googleTranslateElementInit() {
@@ -2232,6 +2239,28 @@ function getPageFromHash() {
   return VALID_PAGES.includes(page) ? page : 'home';
 }
 
+function trackEvent(eventName, params = {}) {
+  if (typeof window.gtag !== 'function') {
+    return;
+  }
+  window.gtag('event', eventName, params);
+}
+
+function trackPageView(pageName) {
+  const activePage = VALID_PAGES.includes(pageName) ? pageName : 'home';
+  const hash = activePage === 'home' ? '' : `#${activePage}`;
+  const pageTitle = PAGE_TITLES[activePage] || PAGE_TITLES.home;
+  const pagePath = `${window.location.pathname}${hash}`;
+  const pageLocation = `${window.location.origin}${pagePath}`;
+
+  trackEvent('page_view', {
+    page_title: pageTitle,
+    page_path: pagePath,
+    page_location: pageLocation,
+    page_name: activePage
+  });
+}
+
 function updateBodyScrollLock() {
   const menu = document.getElementById('mobile-menu');
   const posterModal = document.getElementById('posterModal');
@@ -2265,6 +2294,7 @@ function showPage(name) {
     mainContent.focus({ preventScroll: true });
   }
   window.scrollTo({ top: 0, behavior: 'auto' });
+  trackPageView(activePage);
 }
 
 function showTab(name) {
@@ -2338,6 +2368,13 @@ function submitForm(event) {
     window.location.href = whatsappURL;
   }
 
+  trackEvent('generate_lead', {
+    lead_type: 'puja_booking',
+    service_name: service,
+    city_country: city || 'not_provided',
+    preferred_date: date || 'not_provided'
+  });
+
   successMsg.style.display = 'block';
   bookingForm.reset();
 }
@@ -2352,6 +2389,9 @@ function openPoster() {
   if (closeButton) {
     closeButton.focus();
   }
+  trackEvent('poster_open', {
+    poster_name: 'shrimad_bhagwat_katha_gyan_yajna'
+  });
 }
 
 function closePoster() {
@@ -2410,9 +2450,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.querySelectorAll('[data-page-link]').forEach((link) => {
     link.addEventListener('click', function() {
+      if (link.dataset.pageLink === 'book') {
+        trackEvent('book_puja_click', {
+          source_page: getPageFromHash()
+        });
+      }
       if (window.innerWidth <= 600) {
         toggleMenu(false);
       }
+    });
+  });
+
+  document.querySelectorAll('a[href^="tel:"]').forEach((link) => {
+    link.addEventListener('click', function() {
+      trackEvent('call_click', {
+        phone_number: link.getAttribute('href').replace('tel:', '')
+      });
+    });
+  });
+
+  document.querySelectorAll('a[href*="wa.me"]').forEach((link) => {
+    link.addEventListener('click', function() {
+      trackEvent('whatsapp_click', {
+        link_text: (link.textContent || '').trim() || 'whatsapp'
+      });
+    });
+  });
+
+  document.querySelectorAll('a[href*="google.com/maps/dir"]').forEach((link) => {
+    link.addEventListener('click', function() {
+      trackEvent('directions_click', {
+        destination_url: link.href
+      });
     });
   });
 
