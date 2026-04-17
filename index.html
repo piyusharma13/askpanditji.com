@@ -393,32 +393,6 @@
   }
   .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
 
-  /* GOOGLE TRANSLATE */
-  #google_translate_element select {
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(240,192,64,0.4);
-    color: var(--gold-light);
-    font-size: 0.78rem;
-    font-family: 'Lato', sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    padding: 5px 8px;
-    border-radius: 2px;
-    cursor: pointer;
-    outline: none;
-  }
-  #google_translate_element select option {
-    background: var(--deep-red);
-    color: #fff;
-  }
-  /* Prevent Google Translate from shifting the page body down */
-  body { top: 0 !important; }
-  /* Hide only the top translate banner iframe — NOT the widget itself */
-  .skiptranslate > iframe { display: none !important; }
-  .goog-te-banner-frame { display: none !important; }
-  .goog-te-gadget-icon { display: none !important; }
-  .goog-te-gadget span { display: none !important; }
-
   /* BACK TO HOME BUTTON */
   .back-home-bar {
     background: var(--cream-dark);
@@ -1049,9 +1023,9 @@
     .form-grid { grid-template-columns: 1fr; }
     .about-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
-    #google_translate_element { display: none; }
     .hamburger { display: flex; }
     .mobile-translate { display: flex; align-items: center; }
+    .mobile-lang { display: flex; }
     .trust-item { padding: 10px 16px; font-size: 0.7rem; }
     section { padding: 2rem 1rem; }
     .services-grid { grid-template-columns: 1fr; }
@@ -1066,7 +1040,6 @@
     .gallery-dots { gap: 6px; }
     .dot { width: 6px; height: 6px; }
     .dot.active { width: 20px; }
-    #google_translate_element { display: none; }
     .hamburger { display: flex; }
     .mobile-translate { display: flex; align-items: center; }
   }
@@ -1686,6 +1659,94 @@
     }
   }
 
+  /* ── PREMIUM LANGUAGE SELECTOR ── */
+.lang-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .lang-wrapper { display: none; }
+}
+
+.lang-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(240,192,64,0.4);
+  color: var(--gold-light);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 6px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background: var(--deep-red);
+  border: 1px solid rgba(240,192,64,0.3);
+  border-radius: 4px;
+  display: none;
+  flex-direction: column;
+  min-width: 140px;
+  z-index: 200;
+}
+
+.lang-dropdown button {
+  background: none;
+  border: none;
+  color: rgba(255,240,200,0.85);
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.lang-dropdown button:hover {
+  background: rgba(240,192,64,0.12);
+  color: var(--gold-light);
+}
+
+.lang-dropdown.show {
+  display: flex;
+}
+
+/* Hide Google UI safely */
+#google_translate_element {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  height: 0;
+}
+
+/* MOBILE STICKY LANGUAGE */
+.mobile-lang {
+  position: sticky;
+  top: 0;
+  background: linear-gradient(160deg, #8B1A1A, #3A0A0A);
+  border-bottom: 1px solid rgba(240,192,64,0.3);
+  display: none;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+}
+
+.mobile-lang button {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(240,192,64,0.4);
+  color: var(--gold-light);
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.mobile-lang button.active {
+  background: var(--gold-light);
+  color: #5C0F0F;
+}
+
 </style>
 <meta name="google-site-verification" content="SOC-mLDVmqKgUYydbEtEmzhmIbp93fGsurgp-kI28Zk" />
 <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
@@ -1703,7 +1764,18 @@
     <li><a href="#book" id="nav-book" data-page-link="book">Book Puja</a></li>
     <li><a href="#about" id="nav-about" data-page-link="about">About</a></li>
   </ul>
-  <div id="google_translate_element" aria-label="Language selector"></div>
+  <div class="lang-wrapper">
+    <button class="lang-btn" id="langToggle">🌐 Language</button>
+
+    <div class="lang-dropdown" id="langDropdown">
+      <button data-lang="en">🇬🇧 English</button>
+      <button data-lang="hi">🇮🇳 हिन्दी</button>
+      <button data-lang="pa">🇮🇳 ਪੰਜਾਬੀ</button>
+    </div>
+
+    <!-- Hidden Google Translate -->
+    <div id="google_translate_element"></div>
+  </div>
   <button class="hamburger" id="hamburger" aria-label="Open mobile menu" aria-expanded="false" aria-controls="mobile-menu" type="button">
     <span></span><span></span><span></span>
   </button>
@@ -1716,7 +1788,11 @@
   <a href="#visit" data-page-link="visit">Visit Mandir</a>
   <a href="#book" data-page-link="book">Book a Puja</a>
   <a href="#about" data-page-link="about">About</a>
-  <div class="mobile-translate" id="mobile_translate_element"></div>
+  <div class="mobile-lang">
+    <button data-lang="en">🇬🇧 English</button>
+    <button data-lang="hi">🇮🇳 हिन्दी</button>
+    <button data-lang="pa">🇮🇳 ਪੰਜਾਬੀ</button>
+  </div>
 </div>
 
 <main id="main-content" tabindex="-1">
@@ -2702,5 +2778,97 @@ window.addEventListener('hashchange', syncPageFromLocation);
     <button class="poster-close" id="poster-close" type="button" aria-label="Close poster">✖</button>
     <img src="images/katha.jpg" alt="Shrimad Bhagwat Katha Gyan Yajna event poster" loading="lazy" decoding="async" style="max-width:90%; max-height:90%; border-radius:6px;">
   </div>
+
+  <!-- YOUR LANGUAGE SCRIPT -->
+<script>
+/* DROPDOWN */
+const toggle = document.getElementById("langToggle");
+const dropdown = document.getElementById("langDropdown");
+
+if (toggle && dropdown) {
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation(); // prevent the document click from immediately closing it
+    dropdown.classList.toggle("show");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove("show");
+    }
+  });
+}
+
+/* CHANGE LANGUAGE */
+function changeLanguage(lang) {
+  let attempts = 0;
+  // Google Translate uses "" to restore original (English) page
+  const gtLang = lang === "en" ? "" : lang;
+
+  const interval = setInterval(() => {
+    const select = document.querySelector(".goog-te-combo");
+
+    if (select) {
+      select.value = gtLang;
+      select.dispatchEvent(new Event("change"));
+
+      localStorage.setItem("site_lang", lang);
+      updateActive(lang);
+
+      clearInterval(interval);
+    }
+
+    attempts++;
+    if (attempts > 10) {
+      clearInterval(interval);
+      console.log("Google Translate failed to load");
+    }
+  }, 300);
+}
+
+function updateActive(lang, updateLabel = true) {
+  document.querySelectorAll("[data-lang]").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.lang === lang);
+  });
+
+  if (!updateLabel) return;
+
+  const map = {
+    en: "🌐 Language",
+    hi: "🇮🇳 हिन्दी",
+    pa: "🇮🇳 ਪੰਜਾਬੀ"
+  };
+
+  const toggle = document.getElementById("langToggle");
+  if (toggle && map[lang]) {
+    toggle.textContent = map[lang];
+  }
+}
+
+/* DETECT LANGUAGE */
+function detectLang() {
+  // Only restore a previously saved preference; don't auto-translate new visitors
+  return localStorage.getItem("site_lang") || "en";
+}
+
+/* INIT */
+window.addEventListener("load", () => {
+  const lang = detectLang();
+
+  // Only trigger Google Translate if a non-English preference was saved
+  if (lang && lang !== "en") {
+    setTimeout(() => changeLanguage(lang), 1200);
+  } else {
+    updateActive("en", false); // mark English active but keep button as "🌐 Language"
+  }
+
+  document.querySelectorAll("[data-lang]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      changeLanguage(btn.dataset.lang);
+      if (dropdown) dropdown.classList.remove("show"); // close dropdown after pick
+    });
+  });
+});
+</script>
+
 </body>
 </html>
