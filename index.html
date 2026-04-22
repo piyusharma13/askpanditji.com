@@ -1709,6 +1709,12 @@
   color: var(--gold-light);
 }
 
+.lang-dropdown button.active {
+  background: rgba(240,192,64,0.16);
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
 .lang-dropdown.show {
   display: flex;
 }
@@ -1765,12 +1771,12 @@
     <li><a href="#about" id="nav-about" data-page-link="about">About</a></li>
   </ul>
   <div class="lang-wrapper">
-    <button class="lang-btn" id="langToggle">🌐 Language</button>
+    <button class="lang-btn" id="langToggle" type="button">🌐 Language</button>
 
     <div class="lang-dropdown" id="langDropdown">
-      <button data-lang="en">🇬🇧 English</button>
-      <button data-lang="hi">🇮🇳 हिन्दी</button>
-      <button data-lang="pa">🇮🇳 ਪੰਜਾਬੀ</button>
+      <button data-lang="en" type="button">🇬🇧 English</button>
+      <button data-lang="hi" type="button">🇮🇳 हिन्दी</button>
+      <button data-lang="pa" type="button">🇮🇳 ਪੰਜਾਬੀ</button>
     </div>
 
     <!-- Hidden Google Translate -->
@@ -1789,9 +1795,9 @@
   <a href="#book" data-page-link="book">Book a Puja</a>
   <a href="#about" data-page-link="about">About</a>
   <div class="mobile-lang">
-    <button data-lang="en">🇬🇧 English</button>
-    <button data-lang="hi">🇮🇳 हिन्दी</button>
-    <button data-lang="pa">🇮🇳 ਪੰਜਾਬੀ</button>
+    <button data-lang="en" type="button">🇬🇧 English</button>
+    <button data-lang="hi" type="button">🇮🇳 हिन्दी</button>
+    <button data-lang="pa" type="button">🇮🇳 ਪੰਜਾਬੀ</button>
   </div>
 </div>
 
@@ -2779,95 +2785,251 @@ window.addEventListener('hashchange', syncPageFromLocation);
     <img src="images/katha.jpg" alt="Shrimad Bhagwat Katha Gyan Yajna event poster" loading="lazy" decoding="async" style="max-width:90%; max-height:90%; border-radius:6px;">
   </div>
 
-  <!-- YOUR LANGUAGE SCRIPT -->
+<!-- YOUR LANGUAGE SCRIPT -->
 <script>
-/* DROPDOWN */
-const toggle = document.getElementById("langToggle");
-const dropdown = document.getElementById("langDropdown");
+const SUPPORTED_LANGUAGES = new Set(["en", "hi", "pa"]);
+const LANGUAGE_LABELS = {
+  en: "🌐 Language",
+  hi: "🇮🇳 हिन्दी",
+  pa: "🇮🇳 ਪੰਜਾਬੀ"
+};
+const STORAGE_KEY = "site_lang";
+const GOOGLE_TRANSLATE_COOKIE = "googtrans";
 
-if (toggle && dropdown) {
-  toggle.addEventListener("click", (e) => {
-    e.stopPropagation(); // prevent the document click from immediately closing it
-    dropdown.classList.toggle("show");
-  });
+let languageSyncTimer = null;
 
-  document.addEventListener("click", (e) => {
-    if (!dropdown.contains(e.target)) {
-      dropdown.classList.remove("show");
-    }
-  });
+const langToggle = document.getElementById("langToggle");
+const langDropdown = document.getElementById("langDropdown");
+
+function normalizeLang(lang) {
+  if (!lang) {
+    return "en";
+  }
+
+  const value = String(lang).trim().toLowerCase();
+  if (value.startsWith("hi")) return "hi";
+  if (value.startsWith("pa")) return "pa";
+  if (value.startsWith("en")) return "en";
+  return "en";
 }
 
-/* CHANGE LANGUAGE */
-function changeLanguage(lang) {
-  let attempts = 0;
-  // Google Translate uses "" to restore original (English) page
-  const gtLang = lang === "en" ? "" : lang;
+function getCookie(name) {
+  const prefix = `${name}=`;
+  const cookie = document.cookie
+    .split(";")
+    .map((part) => part.trim())
+    .find((part) => part.startsWith(prefix));
 
-  const interval = setInterval(() => {
-    const select = document.querySelector(".goog-te-combo");
-
-    if (select) {
-      select.value = gtLang;
-      select.dispatchEvent(new Event("change"));
-
-      localStorage.setItem("site_lang", lang);
-      updateActive(lang);
-
-      clearInterval(interval);
-    }
-
-    attempts++;
-    if (attempts > 10) {
-      clearInterval(interval);
-      console.log("Google Translate failed to load");
-    }
-  }, 300);
+  return cookie ? cookie.slice(prefix.length) : "";
 }
 
-function updateActive(lang, updateLabel = true) {
-  document.querySelectorAll("[data-lang]").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.lang === lang);
+function setCookie(name, value, days = 365) {
+  const expires = new Date();
+  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = `${name}=${value}; path=/; expires=${expires.toUTCString()}; SameSite=Lax`;
+}
+
+function clearCookie(name) {
+  document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax`;
+}
+
+function readStoredLanguage() {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    const normalized = normalizeLang(stored);
+    return stored && SUPPORTED_LANGUAGES.has(normalized) ? normalized : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function readTranslateCookieLanguage() {
+  const cookieValue = getCookie(GOOGLE_TRANSLATE_COOKIE);
+  if (!cookieValue) {
+    return null;
+  }
+
+  const parts = cookieValue.split("/").filter(Boolean);
+  if (parts.length < 2) {
+    return null;
+  }
+
+  const normalized = normalizeLang(parts[1]);
+  return SUPPORTED_LANGUAGES.has(normalized) ? normalized : null;
+}
+
+function readBrowserLanguage() {
+  const browserLanguages = Array.isArray(navigator.languages) && navigator.languages.length
+    ? navigator.languages
+    : [navigator.language || navigator.userLanguage || "en"];
+
+  for (const browserLanguage of browserLanguages) {
+    const normalized = normalizeLang(browserLanguage);
+    if (SUPPORTED_LANGUAGES.has(normalized)) {
+      return normalized;
+    }
+  }
+
+  return "en";
+}
+
+function detectLang() {
+  return readStoredLanguage() || readTranslateCookieLanguage() || readBrowserLanguage();
+}
+
+function updateActive(lang) {
+  const current = normalizeLang(lang);
+
+  document.querySelectorAll("[data-lang]").forEach((btn) => {
+    const isActive = normalizeLang(btn.dataset.lang) === current;
+    btn.classList.toggle("active", isActive);
+    btn.setAttribute("aria-pressed", String(isActive));
   });
-
-  if (!updateLabel) return;
-
-  const map = {
-    en: "🌐 Language",
-    hi: "🇮🇳 हिन्दी",
-    pa: "🇮🇳 ਪੰਜਾਬੀ"
-  };
 
   const toggle = document.getElementById("langToggle");
-  if (toggle && map[lang]) {
-    toggle.textContent = map[lang];
+  if (toggle && LANGUAGE_LABELS[current]) {
+    toggle.textContent = LANGUAGE_LABELS[current];
   }
+
+  document.documentElement.lang = current === "en" ? "en-IN" : `${current}-IN`;
 }
 
-/* DETECT LANGUAGE */
-function detectLang() {
-  // Only restore a previously saved preference; don't auto-translate new visitors
-  return localStorage.getItem("site_lang") || "en";
+function applyLanguageToWidget(lang) {
+  const select = document.querySelector("select.goog-te-combo");
+  if (!select) {
+    return false;
+  }
+
+  select.value = normalizeLang(lang);
+  select.dispatchEvent(new Event("change", { bubbles: true }));
+  return true;
 }
 
-/* INIT */
-window.addEventListener("load", () => {
-  const lang = detectLang();
+function syncLanguageToWidget(lang, onApplied = null) {
+  const current = normalizeLang(lang);
 
-  // Only trigger Google Translate if a non-English preference was saved
-  if (lang && lang !== "en") {
-    setTimeout(() => changeLanguage(lang), 1200);
+  if (languageSyncTimer) {
+    clearInterval(languageSyncTimer);
+    languageSyncTimer = null;
+  }
+
+  if (applyLanguageToWidget(current)) {
+    if (typeof onApplied === "function") {
+      onApplied();
+    }
+    return;
+  }
+
+  let attempts = 0;
+  languageSyncTimer = setInterval(() => {
+    attempts += 1;
+    const applied = applyLanguageToWidget(current);
+
+    if (applied || attempts >= 40) {
+      clearInterval(languageSyncTimer);
+      languageSyncTimer = null;
+
+      if (applied && typeof onApplied === "function") {
+        onApplied();
+      }
+    }
+  }, 250);
+}
+
+function persistLanguage(lang) {
+  const current = normalizeLang(lang);
+
+  try {
+    localStorage.setItem(STORAGE_KEY, current);
+  } catch (error) {
+    // Ignore storage failures in private mode or locked-down browsers.
+  }
+
+  if (current === "en") {
+    clearCookie(GOOGLE_TRANSLATE_COOKIE);
   } else {
-    updateActive("en", false); // mark English active but keep button as "🌐 Language"
+    setCookie(GOOGLE_TRANSLATE_COOKIE, `/en/${current}`);
+  }
+}
+
+function changeLanguage(lang) {
+  const current = normalizeLang(lang);
+  if (!SUPPORTED_LANGUAGES.has(current)) {
+    return;
   }
 
-  document.querySelectorAll("[data-lang]").forEach(btn => {
+  const cookieLanguage = readTranslateCookieLanguage();
+  updateActive(current);
+  persistLanguage(current);
+
+  if (current === "en" && !cookieLanguage) {
+    return;
+  }
+
+  syncLanguageToWidget(current);
+}
+
+function closeLanguageDropdown() {
+  if (!langDropdown) {
+    return;
+  }
+
+  langDropdown.classList.remove("show");
+
+  if (langToggle) {
+    langToggle.setAttribute("aria-expanded", "false");
+  }
+}
+
+function initLanguageControls() {
+  if (langToggle && langDropdown) {
+    langToggle.setAttribute("aria-haspopup", "menu");
+    langToggle.setAttribute("aria-expanded", "false");
+
+    langToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const isOpen = langDropdown.classList.toggle("show");
+      langToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!langDropdown.contains(event.target) && !langToggle.contains(event.target)) {
+        closeLanguageDropdown();
+      }
+    });
+  }
+
+  const savedLang = readStoredLanguage() || readTranslateCookieLanguage();
+  const lang = detectLang();
+  updateActive(lang);
+
+  if (savedLang) {
+    changeLanguage(savedLang);
+  } else if (lang !== "en") {
+    syncLanguageToWidget(lang, () => {
+      setTimeout(() => {
+        clearCookie(GOOGLE_TRANSLATE_COOKIE);
+      }, 1000);
+    });
+  } else {
+    clearCookie(GOOGLE_TRANSLATE_COOKIE);
+  }
+
+  document.querySelectorAll("[data-lang]").forEach((btn) => {
     btn.addEventListener("click", () => {
       changeLanguage(btn.dataset.lang);
-      if (dropdown) dropdown.classList.remove("show"); // close dropdown after pick
+      closeLanguageDropdown();
     });
   });
-});
+
+  window.addEventListener("storage", (event) => {
+    if (event.key === STORAGE_KEY && event.newValue) {
+      changeLanguage(event.newValue);
+    }
+  });
+}
+
+initLanguageControls();
 </script>
 
 </body>
